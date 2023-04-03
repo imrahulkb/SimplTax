@@ -123,7 +123,15 @@ const data = [
       "Apply Surcharge and Health and Education Cess: If the taxable income exceeds certain limits, surcharge and health and education cess are applicable as per the Income Tax Act.",
       "Calculate Tax Liability: Finally, the tax liability is calculated by adding the tax and surcharge, if applicable, and then adding health and education cess to it."
     ]
-  }
+  },
+  {
+    id:"80ccd",
+    name: "Section 80CCD",
+    subtitle: "Deduction in respect of contribution to pension scheme of Central Government",
+
+summary: "Section 80CCD is a provision of the Indian Income Tax Act that allows taxpayers to claim deductions on contributions made towards the National Pension System (NPS) and other pension schemes.",
+
+detail:[ "Section 80CCD has two sub-sections:","Section 80CCD(1):"," This sub-section allows taxpayers to claim deductions on contributions made towards the NPS and other pension schemes."," The deduction limit for section 80CCD(1) is 10% of salary (for salaried individuals) or 10% of gross income (for self-employed individuals) and the maximum deduction limit is Rs. 1.5 lakh."," This deduction is also available to employees who are contributing to the government pension scheme, i.e., the Atal Pension Yojana (APY).","Section 80CCD(1B): This sub-section allows an additional deduction of up to Rs. 50,000 to be claimed on contributions made towards the NPS."," This deduction is over and above the limit allowed under section 80CCD(1)."," However, this deduction is only available to individuals and not to HUFs (Hindu Undivided Families).","In summary, Section 80CCD provides taxpayers with a means of reducing their tax liability by claiming deductions on contributions made towards pension schemes."," The NPS is one such scheme, and the deductions can be claimed under both sub-sections of Section 80CCD"] }
 ];
 
 export default data;
