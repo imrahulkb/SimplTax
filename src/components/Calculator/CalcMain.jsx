@@ -171,7 +171,7 @@ export default function CalcMain() {
           />
         </Form.Group>
         <Form.Group controlId="married" style={{ width: "30rem", margin : "10px 20px" }}>
-        <Form.Label>Are you or (if married) your spouse a senior citizen? (age >= 60)</Form.Label>
+        <Form.Label>Are you or (if married) your spouse a senior citizen? {"(age > 59 )"}</Form.Label>
           <Form.Control
             as="select"
             name="married"
