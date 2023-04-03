@@ -6,3 +6,17 @@
   height: 100%;
   overflow-y: auto;
 }
+.innerTab{
+  display : grid;
+  justify-content : center
+}
+.quesCover{text-align : left;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content : center
+}
+
+.field{
+ width: 30rem;
+margin: 10px 20px;
+}

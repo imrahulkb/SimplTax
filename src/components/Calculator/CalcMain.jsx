@@ -60,9 +60,9 @@ export default function CalcMain() {
         fill
       >
         <Tab eventKey={0} title="Income Details" >
-        <div style={{display : "grid", justifyContent : "center"}}>
-        <div style={{textAlign : "left", display:"flex", flexWrap: "wrap", justifyContent : "center"}}>
-        <Form.Group controlId="grossAnnualIncome" style={{ width: "30rem", margin : "10px 20px" }}>
+        <div className="innerTab">
+      <div className="quesCover">
+       <Form.Group controlId="grossAnnualIncome" className="field">
           <Form.Label>Gross Annual Income</Form.Label>
             <Form.Control
               type="number"
@@ -71,7 +71,7 @@ export default function CalcMain() {
               onChange={handleChange}  
             />
         </Form.Group>
-        <Form.Group controlId="grossBusinessIncome" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="grossBusinessIncome" className="field">
           <Form.Label>Gross Business Income</Form.Label>
             <Form.Control
               type="number"
@@ -80,7 +80,7 @@ export default function CalcMain() {
               onChange={handleChange}  
             />
         </Form.Group>
-        <Form.Group controlId="interestIncome" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="interestIncome" className="field">
           <Form.Label> Income from interest on Savings Account </Form.Label>
           <Form.Control
             type="number"
@@ -89,7 +89,7 @@ export default function CalcMain() {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="otherIncome" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="otherIncome" className="field">
           <Form.Label> Income from other sources </Form.Label>
           <Form.Control
             type="number"
@@ -98,7 +98,7 @@ export default function CalcMain() {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="rentalIncome" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="rentalIncome" className="field">
           <Form.Label> Income earned from Rent </Form.Label>
           <Form.Control
             type="number"
@@ -107,7 +107,7 @@ export default function CalcMain() {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="disabilityPercentage" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="disabilityPercentage" className="field">
           <Form.Label>Are you a disabled person? If yes provide disabilty percentage</Form.Label>
           <Form.Control
             type="number"
@@ -132,9 +132,9 @@ export default function CalcMain() {
         </Tab>
 
         <Tab eventKey={1} title="Investment Details" >
-      <div style={{display : "grid", justifyContent : "center"}}>
-      <div style={{textAlign : "left", display:"flex", flexWrap: "wrap", justifyContent : "center"}}>
-        <Form.Group controlId="mutualFundsInvest" style={{ width: "30rem", margin : "10px 20px" }}>
+        <div className="innerTab">
+      <div className="quesCover">
+       <Form.Group controlId="mutualFundsInvest" className="field">
           <Form.Label> Investment in tax-saving mutual funds (ELSS) </Form.Label>
           <Form.Control
             type="number"
@@ -143,7 +143,7 @@ export default function CalcMain() {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="ppfInvest" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="ppfInvest" className="field">
           <Form.Label> Investment in Public Provident Fund (PPF) </Form.Label>
           <Form.Control
             type="number"
@@ -152,7 +152,7 @@ export default function CalcMain() {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="nscInvest" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="nscInvest" className="field">
           <Form.Label> Investment in National Savings Certificate (NSC)</Form.Label>
           <Form.Control
             type="number"
@@ -161,7 +161,7 @@ export default function CalcMain() {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="healthInsurance" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="healthInsurance" className="field">
           <Form.Label>Health Insurance Amount (If any)</Form.Label>
           <Form.Control
             type="number"
@@ -170,7 +170,7 @@ export default function CalcMain() {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="married" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="married" className="field">
         <Form.Label>Are you or (if married) your spouse a senior citizen? {"(age > 59 )"}</Form.Label>
           <Form.Control
             as="select"
@@ -182,7 +182,7 @@ export default function CalcMain() {
             <option value="yes">Yes</option>
           </Form.Control>
         </Form.Group>
-        <Form.Group controlId="donations" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="donations" className="field">
           <Form.Label>Donations that can be deduced as per <a href="./blogs/80G">Section 80G</a></Form.Label>
           <Form.Control
             type="number"
@@ -209,9 +209,9 @@ export default function CalcMain() {
      </Tab>
 
         <Tab eventKey={2} title="Expenditures">
-        <div style={{display : "grid", justifyContent : "center"}}>
-      <div style={{textAlign : "left", display:"flex", flexWrap: "wrap", justifyContent : "center"}}>
-      <Form.Group controlId="lipPay" style={{ width: "30rem", margin : "10px 20px" }}>
+        <div className="innerTab">
+      <div className="quesCover">
+      <Form.Group controlId="lipPay" className="field">
           <Form.Label>Payment of Life Insurance Premium(LIP) </Form.Label>
           <Form.Control
             type="number"
@@ -220,7 +220,7 @@ export default function CalcMain() {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="tutionFee" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="tutionFee" className="field">
           <Form.Label> Payment of tuition fees for children's education</Form.Label>
           <Form.Control
             type="number"
@@ -229,7 +229,7 @@ export default function CalcMain() {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="homeLoanRepay" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="homeLoanRepay" className="field">
           <Form.Label>Repayment of principal amount of home loan</Form.Label>
           <Form.Control
             type="number"
@@ -238,7 +238,7 @@ export default function CalcMain() {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="educationLoan" style={{ width: "30rem", margin : "10px 20px" }}>
+        <Form.Group controlId="educationLoan" className="field">
           <Form.Label>Provide the interest paid on education Loan(higher studies)(if any)</Form.Label>
           <Form.Control
             type="number"
