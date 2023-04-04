@@ -1,20 +1,27 @@
 import { useState } from "react";
-import blogdata from "../blogs";
 import Blog from "./Blog";
 import BlogDetailed from "./BlogDetailed";
 import { Route, Routes } from "react-router-dom";
 import { Form } from "react-bootstrap";
+import BlogFake from "./BlogFake";
+import fetchData from "../blogs";
 
 export default function BlogPage() {
+
+  const blogdataPromise = fetchData();
+  const [blogdata,setBlogdata]= useState([{}])
+
+  blogdataPromise.then(data => {
+    setBlogdata([...data.blogData]);
+  });
+  
+
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredBlogs = blogdata.filter((blog) => {
-    const blogDetails = blog.detail || []; // make sure blog.detail is an array
+   const blogDetails = blog.detail || []; // make sure blog.detail is an array
     return [
-      ...blogDetails,
-      blog.name,
-      blog.summary,
-      blog.subtitle
+     ...blogDetails
     ].some((detail) =>
       detail.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -64,13 +71,14 @@ export default function BlogPage() {
                   justifyContent: "center"
                 }}
               >
-                {filteredBlogs.length > 0 ? (
+
+                {(filteredBlogs.length > 0 ? (
                   filteredBlogs.map((blog) => (
                     <Blog blog={blog} key={blog.id} />
                   ))
                 ) : (
-                  <p>No blogs found</p>
-                )}
+                  ['','','','','','','','',''].map(()=>(<BlogFake/>))
+                ))}
               </div>
             </div>
           </>
