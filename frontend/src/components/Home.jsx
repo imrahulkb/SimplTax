@@ -39,14 +39,14 @@ export default function Home() {
                     marginTop: "60px"
                   }}
                 >
-                  <span class="h2">Features</span>
+                  <span className="h2">Features</span>
 
                   {[
                     "Quick and Accurate Tax Calculations",
                     "Secure and Confidential",
                     "User-Friendly Interface."
                   ].map((feature) => (
-                    <div>
+                    <div key={feature}>
                       <Card style={{ margin: "10px" }} bg="light">
                         <Card.Body>
                           <Card.Title style={{ margin: "0px" }}>
@@ -76,8 +76,8 @@ export default function Home() {
                 style={{ width: "400px", maxWidth: "80%", marginTop: "30px" }}
               />
               <div style={{ margin: "20px", maxWidth: "90%" }}>
-                <span class="h5">
-                  <span class="h3"> Welcome </span>to our website. We make
+                <span className="h5">
+                  <span className="h3"> Welcome </span>to our website. We make
                   calculating your taxes easy and stress-free. Simply enter your
                   information, and we'll do the rest. Our website is secure and
                   user-friendly, and you'll get an estimate of your refund or

@@ -77,7 +77,7 @@ export default function BlogPage() {
                     <Blog blog={blog} key={blog.id} />
                   ))
                 ) : (
-                  ['','','','','','','','',''].map(()=>(<BlogFake/>))
+                  <p>No blogs found</p>
                 ))}
               </div>
             </div>
