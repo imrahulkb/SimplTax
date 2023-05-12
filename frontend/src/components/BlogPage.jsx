@@ -3,17 +3,20 @@ import Blog from "./Blog";
 import BlogDetailed from "./BlogDetailed";
 import { Route, Routes } from "react-router-dom";
 import { Form } from "react-bootstrap";
-import BlogFake from "./BlogFake";
 import fetchData from "../blogs";
+import { useEffect } from "react";
 
 export default function BlogPage() {
-
-  const blogdataPromise = fetchData();
   const [blogdata,setBlogdata]= useState([{}])
+  useEffect(() => {
+    const blogdataPromise = fetchData();
+    
+    blogdataPromise.then(data => {
+      setBlogdata([...data]);
+    });
+  }, []);
 
-  blogdataPromise.then(data => {
-    setBlogdata([...data.blogData]);
-  });
+ 
   
 
   const [searchQuery, setSearchQuery] = useState("");

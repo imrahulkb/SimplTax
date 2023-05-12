@@ -4,23 +4,24 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import BlogPage from "./components/BlogPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import fetchData, { fetchSum } from "./blogs";
+import fetchData from "./blogs";
 import CalcMain from "./components/Calculator/CalcMain";
 import { useState } from "react";
+import Admin from "./components/Admin"
+import { useEffect } from "react";
+
+
 export default function App() {
-  const blogdataPromise = fetchData();
+
   const [blogdata,setBlogdata]= useState([{}])
+  useEffect(() => {
+    const blogdataPromise = fetchData();
+    
+    blogdataPromise.then(data => {
+      setBlogdata([...data]);
+    });
+  }, []);
 
-  blogdataPromise.then(data => {
-    setBlogdata([...data.blogData]);
-  //  console.log([...data.blogData]);
-  });
-  const sumPromise = fetchSum(1,22);
-  const [sum,setSum]= useState([{}])
-
-  sumPromise.then(data => {
-    setSum(sum);  //  console.log([...data.sum]);
-  });
  
  
 
@@ -38,6 +39,7 @@ export default function App() {
             <Route path={`/blogs/1`} key="1" element={<></>} />
           </Route>
           <Route path="calculator" element={<CalcMain />}></Route>
+          <Route path="admin" element={<Admin/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

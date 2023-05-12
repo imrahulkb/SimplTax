@@ -1,9 +1,6 @@
 import { Card, Button } from "react-bootstrap";
 
 function Blog(prop) {
-  // Get the parent element of the card
- // console.log(prop);
-  // Render the card with the blog data
   return (
     <Card
       style={{ width: "340px", margin: "20px" }}

@@ -1,8 +1,19 @@
 import React, { useState } from "react";
-import { Tabs, Tab, Form, Container, Button } from "react-bootstrap";
+import { Tabs, Tab, Form, Container, Button,Card } from "react-bootstrap";
+import { ListGroup,Table } from "react-bootstrap";
 
 export default function CalcMain() {
+  const [summary,setSummary] = useState([]);
   const [activeTab, setActiveTab] = useState(0);
+  const [summTable,setSummtable] = useState({
+    total_80C_deduction : 0,
+    total_80D_deduction : 0,
+    total_80E_deduction : 0,
+    total_80G_deduction : 0,
+    grossTotalIncome: 0,
+    total_deductions: 0,
+    taxamount: 0,
+  })
   const [state, setState] = useState({
     grossAnnualIncome: 10,
     interestIncome: 0,
@@ -13,13 +24,13 @@ export default function CalcMain() {
     ppfInvest: 0,
     nscInvest: 0,
     healthInsurance: 0,
-    married: "N0",
+    marital_status: "NO",
     donations: 0,
     lipPay: 0,
     homeLoanRepay: 0,
     educationLoan: 0,
     grossBusinessIncome: 0,
-    tutionFee: 0
+    tuitionFee: 0
   });
 
   const handleNext = () => {
@@ -38,7 +49,40 @@ export default function CalcMain() {
     e.preventDefault();
     console.log(state);
   };
-
+ 
+  function calculateTax() {
+    const url = "https://32d5uh-8080.csb.app/calculate";
+    const requestBody = state;
+    
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(requestBody)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      setSummary([...data.summary_80C,...data.summary_80D,...data.summary_80E,...data.summary_80G])
+      setSummtable({total_80C_deduction : data.total_80C_deduction,
+        total_80D_deduction : data.total_80D_deduction,
+        total_80E_deduction : data.total_80E_deduction,
+        total_80G_deduction : data.total_80G_deduction,
+      total_deductions: data.total_deductions,
+    grossTotalIncome: data.grossTotalIncome,
+    taxamount: data.taxamount,
+    taxpercent: data.taxpercent,
+  })
+        console.log(summTable);
+    }
+    
+    )
+    .catch(error => {
+      console.error("Error calculating taxable income: ", error);
+    });
+  }
+  
   return (
     <Container style={{ marginTop: "20px" }}>
       <div
@@ -184,26 +228,24 @@ export default function CalcMain() {
                       onChange={handleChange}
                     />
                   </Form.Group>
-                  <Form.Group controlId="married" className="field">
+                  <Form.Group controlId="marital_status" className="field">
                     <Form.Label>
-                      Are you or (if married) your spouse a senior citizen?{" "}
+                      Are you or (if marital_status) your spouse a senior citizen?{" "}
                       {"(age > 59 )"}
                     </Form.Label>
                     <Form.Control
                       as="select"
-                      name="married"
-                      value={state.married}
+                      name="marital_status"
+                      value={state.marital_status}
                       onChange={handleChange}
                     >
                       <option value="no">No</option>
                       <option value="yes">Yes</option>
                     </Form.Control>
                   </Form.Group>
-                  <Form.Group controlId="donations" className="field">
-                    <Form.Label>
-                      Donations that can be deduced as per{" "}
-                      <a href="./blogs/80G">Section 80G</a>
-                    </Form.Label>
+                  <Form.Group controlId="healthInsurance" className="field">
+                    <Form.Label>Donations that can be deduced as per{" "}
+                      <a href="./blogs/80G">Section 80G</a></Form.Label>
                     <Form.Control
                       type="number"
                       name="donations"
@@ -229,7 +271,7 @@ export default function CalcMain() {
             </Tab>
 
             <Tab eventKey={2} title="Expenditures">
-              <div className="innerTab">
+              <div className="innerTab"  >
                 <div className="quesCover">
                   <Form.Group controlId="lipPay" className="field">
                     <Form.Label>
@@ -242,15 +284,15 @@ export default function CalcMain() {
                       onChange={handleChange}
                     />
                   </Form.Group>
-                  <Form.Group controlId="tutionFee" className="field">
+                  <Form.Group controlId="tuitionFee" className="field">
                     <Form.Label>
                       {" "}
                       Payment of tuition fees for children's education
                     </Form.Label>
                     <Form.Control
                       type="number"
-                      name="tutionFee"
-                      value={state.tutionFee}
+                      name="tuitionFee"
+                      value={state.tuitionFee}
                       onChange={handleChange}
                     />
                   </Form.Group>
@@ -295,17 +337,99 @@ export default function CalcMain() {
             </Tab>
 
             <Tab eventKey={3} title="Summary">
-              {/* your Summary form fields */}
+            <div className="innerTab">
+              <div className="quesCover">
+                {
+                  (summary.length ===0)?
+                    (<Card style={{maxWidth : "600px"}}>
+                    <Card.Header>
+                      Summary
+                    </Card.Header>
+                    <Card.Body>
+                      <Card.Text>Your summary will appear here</Card.Text>
+                    </Card.Body>
+                    </Card>):(<Card style={{maxWidth : "600px"}}>
+                      <Card.Header>
+                      Summary
+                    </Card.Header>
+                    <Table striped bordered hover>
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Amount Type</th>
+                          <th>Amount in Rs.</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>80C Deductions</td>
+                          <td>{summTable.total_80C_deduction}</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>80D Deductions</td>
+                          <td>{summTable.total_80D_deduction}</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>80E Deductions</td>
+                          <td>{summTable.total_80E_deduction}</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>80G Deductions</td>
+                          <td>{summTable.total_80G_deduction}</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>Total Income = (Gross Income + Business Income + Rent + Interest)</td>
+                          <td>{summTable.grossTotalIncome}</td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>Total Deductions = (80C + 80D + 80E + 80G Deductions)</td>
+                          <td>{summTable.total_deductions}</td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td>Taxable Income = (Total Income - Total Deductions)</td>
+                          <td>{summTable.grossTotalIncome - summTable.total_deductions}</td>
+                        </tr>
+                        <tr>
+                          <th>X</th>
+                          <th>Final Tax is {summTable.taxpercent}% of taxable income as per tax slabs</th>
+                          <th>{summTable.taxamount}</th>
+                        </tr>
+
+                        
+                      </tbody>
+                    </Table>
+                    <ListGroup variant="flush">
+                     { summary.map((line)=>(
+                      <ListGroup.Item key={line}>{line}</ListGroup.Item>
+                    ))}</ListGroup>
+
+                    
+                    </Card>
+                    )
+                  }
+                  
+              </div>
+              </div>
+              <div style={{margin : "20px"}}>
               <Button variant="secondary" onClick={handlePrev}>
                 Previous
               </Button>{" "}
               <Button
                 variant="primary"
                 type="submit"
-                onClick={console.log(state)}
+                onClick={calculateTax}
               >
                 Submit
               </Button>
+              </div>
+              
             </Tab>
           </Tabs>
         </Form>
